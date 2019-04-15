@@ -12,8 +12,11 @@ async def main():
     client = TelegramClient(
             credentials['session_name'],
             credentials['api_id'],
-            credential['api_hash'])
+            credentials['api_token'])
     await client.start(bot_token = credentials['bot_token'])
+
+    me = await client.get_me()
+    print('Logged in as ' + me.username + '.')
 
     await client.run_until_disconnected()
 
