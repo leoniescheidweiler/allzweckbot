@@ -17,6 +17,6 @@ def kolloquium():
     professor_link  = re.sub('(<[^>]+>|[\'\"])', '', href_blocks[1][0])
     professor       = re.sub('(<[^>]+>|[\'\"])', '', href_blocks[1][1])
 
-    output = 'Kolloquium:\n['+title_link+']('+title+')\n['+professor_link+']('+professor+')'
+    output = 'Kolloquium:\n\n['+title+']('+title_link+')\n\n['+professor+']('+professor_link+')'
 
     return(output)

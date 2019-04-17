@@ -51,29 +51,20 @@ async def main():
             await asyncio.sleep(20)
     get_allesdreck = loop.create_task(get_allesdreck())
 
-    title_link = 'https://github.com/leonscheidweiler'
-    title = 'title'
-    output = ''.join(['Kolloquium:\n[',title_link,'](',title,')'])
-    print(output)
-    async def pretty_output(output):
-        await client.send_message('leonscheidweiler', output)
-        await client.send_message('danielkutny', output)
-        await client.send_message('boboderbaer', output)
-
-        await client.send_message('leonscheidweiler', '[https://github.com/leonscheidweiler](title) [https://www.example.de](beispiel)')
-        await client.send_message('danielkutny', '[https://github.com/leonscheidweiler](title) [https://www.example.de](beispiel)')
-        await client.send_message('boboderbaer', '[https://github.com/leonscheidweiler](title) [https://www.example.de](beispiel)')
-    send_pretty_output = loop.create_task(pretty_output(output))
-
-    #async def get_kolloquium():
-    #    await client.send_message('leonscheidweiler', kolloquium.kolloquium())
-    #    await client.send_message('danielkutny', kolloquium.kolloquium())
-    #    await client.send_message('boboderbaer', kolloquium.kolloquium())
-    #get_kolloquium = loop.create_task(get_kolloquium())
+    async def get_kolloquium():
+        while True:
+            hour = int(datetime.datetime.now(tz).hour)
+            minute = int(datetime.datetime.now(tz).minute)
+            weekday = int(datetime.datetime.now(tz).weekday())
+            if (weekday == 3 and hour==20 and minute==0):
+                await asyncio.sleep(4)
+                await client.send_message(group_chat, kolloquium.kolloquium())
+                await asyncio.sleep(60*60*24*7-100)
+            await asyncio.sleep(20)
+    get_kolloquium = loop.create_task(get_kolloquium())
 
     await get_allesdreck
-    #await get_kolloquium
-    await send_pretty_output
+    await get_kolloquium
 
     await client.run_until_disconnected()
 
