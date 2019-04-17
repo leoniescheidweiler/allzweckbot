@@ -1,2 +1,4 @@
 telethon
 asyncio
+requests
+pytz

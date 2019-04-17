@@ -1,2 +1,6 @@
 credentials.json
 env/
+group_info.json
+*session
+*swp
+*__pycache__*
