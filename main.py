@@ -44,10 +44,14 @@ async def main():
         while True:
             hour = int(datetime.datetime.now(tz).hour)
             minute = int(datetime.datetime.now(tz).minute)
+            weekday = int(datetime.datetime.now(tz).weekday())
             if (hour==11 and minute==0):
-                await asyncio.sleep(4)
-                await client.send_message(group_chat, allesdreck.allesdreck())
-                await asyncio.sleep(60*60*23*1/60*55)
+                if weekday < 5:
+                    await asyncio.sleep(4)
+                    await client.send_message(group_chat, allesdreck.allesdreck())
+                    await asyncio.sleep(60*60*23*1/60*55)
+                else:
+                    await asyncio.sleep(60*60*23*1/60*55)
             await asyncio.sleep(20)
     get_allesdreck = loop.create_task(get_allesdreck())
 
