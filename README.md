@@ -1,2 +1,3 @@
 # allzweckbot
-Telegram bot for a group chat
+
+Telegram bot der die Speisekarte und das wöchentliche Kolloquium in eine Gruppe postet.
